@@ -1,9 +1,9 @@
-import random
 import asyncio
 import time
 
 import aiohttp
 import grpc
+import secrets
 
 
 def _raise_last_attempt(err, attempt):
@@ -85,8 +85,7 @@ def _wait_time(attempt, backoff_multiplier, initial_backoff, max_backoff):
     if attempt == 1:
         wait_time = initial_backoff
     else:
-        wait_time = random.uniform(
-            0,
+        wait_time = secrets.SystemRandom().uniform(0,
             min(initial_backoff * backoff_multiplier ** (attempt - 1), max_backoff),
         )
     return wait_time
