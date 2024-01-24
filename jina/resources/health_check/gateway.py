@@ -5,7 +5,7 @@ def check_health_http(addr):
     import requests
 
     try:
-        resp = requests.get(f'http://{addr}/')
+        resp = requests.get(f'http://{addr}/', timeout=60)
         if not resp.status_code == 200:
             raise RuntimeError(
                 f'The http gateway is unhealthy http status : {resp.status_code}'
