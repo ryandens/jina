@@ -13,6 +13,7 @@ from jina.constants import (
     __dynamic_base_gateway_hubble__
 )
 from jina.enums import PodRoleType
+from security import safe_requests
 
 
 def resolve_image_name(uses: Optional[str]):
@@ -84,12 +85,11 @@ def get_base_executor_version():
     Get the version of jina to be used
     :return: the version tag
     """
-    import requests
 
     try:
         from jina import __version__
         url = 'https://registry.hub.docker.com/v2/repositories/jinaai/jina/tags'
-        result: Dict = requests.get(url, params={'name': __version__}).json()
+        result: Dict = safe_requests.get(url, params={'name': __version__}).json()
         if result.get('count', 0) > 0:
             return __version__
         else:
