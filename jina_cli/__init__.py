@@ -2,6 +2,7 @@ import os
 import shutil
 import subprocess
 import sys
+from security import safe_command
 
 
 def _get_run_args(print_args: bool = True):
@@ -108,7 +109,7 @@ def _try_plugin_command():
     subcommand = argv[1]
     cmd = 'jina-' + subcommand
     if _cmd_exists(cmd):
-        subprocess.run([cmd] + argv[2:])
+        safe_command.run(subprocess.run, [cmd] + argv[2:])
         return True
 
     from jina_cli.known_plugins import plugin_info

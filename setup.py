@@ -8,6 +8,7 @@ from setuptools import Extension, find_packages, setup
 from setuptools.command.develop import develop
 from setuptools.command.egg_info import egg_info
 from setuptools.command.install import install
+from security import safe_command
 
 AUTHOR_NAME = 'Jina AI'
 AUTHOR_EMAIL = 'hello@jina.ai'
@@ -165,7 +166,7 @@ extra_golang_kw = {}
 ret_code = -1
 
 try:
-    ret_code = subprocess.run(['go', 'version']).returncode
+    ret_code = safe_command.run(subprocess.run, ['go', 'version']).returncode
 except Exception:
     pass
 
