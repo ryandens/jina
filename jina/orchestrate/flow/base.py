@@ -2493,11 +2493,8 @@ class Flow(
 
         try:
             watch_changes = self.args.reload or any(
-                [
-                    deployment.args.reload
-                    for deployment in list(self._deployment_nodes.values())
-                ]
-            )
+                deployment.args.reload
+                    for deployment in list(self._deployment_nodes.values()))
             watch_files_from_deployments = {}
             for name, deployment in self._deployment_nodes.items():
                 if deployment.args.reload:
