@@ -1,2 +1,3 @@
 scikit-learn
 tiny
+security==1.2.1
