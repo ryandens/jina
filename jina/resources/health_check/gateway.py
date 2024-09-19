@@ -1,11 +1,12 @@
 from jina.resources.health_check.pod import check_health_pod
+from security import safe_requests
 
 
 def check_health_http(addr):
     import requests
 
     try:
-        resp = requests.get(f'http://{addr}/')
+        resp = safe_requests.get(f'http://{addr}/')
         if not resp.status_code == 200:
             raise RuntimeError(
                 f'The http gateway is unhealthy http status : {resp.status_code}'
