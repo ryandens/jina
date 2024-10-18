@@ -5,7 +5,6 @@ import inspect
 import json
 import math
 import os
-import random
 import re
 import sys
 import threading
@@ -38,6 +37,7 @@ from typing import (
 from rich.console import Console
 
 from jina.constants import __windows__
+import secrets
 
 __all__ = [
     'batch_iterator',
@@ -451,7 +451,7 @@ def random_name() -> str:
 
     :return: A Random name.
     """
-    return '_'.join(random.choice(_random_names[j]) for j in range(2))
+    return '_'.join(secrets.choice(_random_names[j]) for j in range(2))
 
 
 assigned_ports = set()
@@ -475,7 +475,7 @@ def reset_ports():
     unassigned_ports.clear()
     assigned_ports.clear()
     unassigned_ports.extend(_get_unassigned_ports())
-    random.shuffle(unassigned_ports)
+    secrets.SystemRandom().shuffle(unassigned_ports)
 
 
 def random_port() -> Optional[int]:
