@@ -105,7 +105,7 @@ for key in list(reqs.keys()):
 ######################################
 
 
-page = requests.get('https://pypi.org/project/jina/')
+page = requests.get('https://pypi.org/project/jina/', timeout=60)
 soup = BeautifulSoup(page.text, 'html.parser')
 pkg_ver_name = soup.select_one('h1.package-header__name').contents[0].strip()
 jina_version = pkg_ver_name.split(' ')[-1]
